@@ -1,0 +1,55 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Pessoa{
+-nome: String
+-cpf: String
+-moedas: int
+}
+
+class Aluno extends Pessoa{
+-id:Long
+-email.: String
+-rg: String
+-endereco: Endereco
+-instituicao: Instituicao
+-curso: Curso
+}
+
+class Professor extends Pessoa{
+-id:Long
+-departamento: Departamento
+}
+
+class Endereco{
+-id:Long
+-CEP:String
+-numero:int
+-complemento:String
+}
+
+class Instituicao{
+-id:Long
+-nome: String
+}
+
+class Departamento{
+-id:Long
+-nome:String
+-instituicao: Instituicao
+}
+
+class Curso{
+-id:Long
+-nome:String
+-instituicao: Instituicao
+}
+
+
+Aluno -- Endereco
+Professor -- Departamento
+Departamento -- Instituicao
+Curso -- Instituicao
+
+
+@enduml
