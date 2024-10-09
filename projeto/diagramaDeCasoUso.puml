@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+actor "Pessoa" as P
+actor "Aluno" as A1
+actor "Professor" as A2
+actor "Empresa Parceira" as A3
+
+rectangle "Sistema de Reconhecimento de Mérito Estudantil" as System {
+
+  usecase "Cadastrar no Sistema" as UC1
+  usecase "Consultar Extrato de Moedas" as UC2
+  usecase "Trocar Moedas por Vantagens" as UC3
+  usecase "Distribuir Moedas aos Alunos" as UC4
+  usecase "Cadastrar Vantagens" as UC5
+  usecase "Consultar Transações" as UC7
+  usecase "Fazer Login" as UC6
+
+}
+
+P <|-- A1
+P <|-- A2
+P <|-- A3
+
+P --> UC6
+
+A1 --> UC1
+A1 --> UC2
+A1 --> UC3
+
+A2 --> UC4
+A2 --> UC2
+
+A3 --> UC5
+A3 --> UC7
+A3 --> UC1
+@enduml
