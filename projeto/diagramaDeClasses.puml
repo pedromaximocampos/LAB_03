@@ -53,19 +53,26 @@ class Curso{
 -instituicao: Instituicao
 }
 
-class Trsansacao{
+class TransacaoProfessor extends Transacao{
+-descricao: String
+-professor: Professor
+}
+
+class TransacaoTroca extends Transacao{
+-vantagem: Vantagem
+}
+
+abstract class Transacao{
 -id:Long
--Professor:professor
--Aluno:aluno
--String:descricao
--Vantagem:vantagem
--DateTime:dt_Transacao
+-aluno: Aluno
+-moedas: Double
+-dt_Transacao: LocalDateTime
 }
 
 class Vantagem{
 id:Long
 nome:String
-curso:Curso
+custo: Double
 Empresa:Empresa
 }
 
@@ -76,14 +83,16 @@ void : cadastrarVantagem(Vantagem:vantagem)
 }
 
 
-Aluno -- Trsansacao
+Aluno -- TransacaoProfessor
 Aluno -- Endereco
 Aluno -- Vantagem
+Aluno -- TransacaoTroca
 Empresa -- Vantagem
 Professor -- Departamento
-Professor -- Trsansacao
+Professor -- TransacaoProfessor
 Departamento -- Instituicao
 Curso -- Instituicao
+
 
 
 @enduml
