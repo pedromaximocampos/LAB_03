@@ -5,6 +5,7 @@ abstract class Pessoa{
 -nome: String
 -cpf: String
 -moedas: int
+-int:consultarSaldo(Pessoa:pessoa)
 }
 
 class Aluno extends Pessoa{
@@ -13,12 +14,19 @@ class Aluno extends Pessoa{
 -rg: String
 -endereco: Endereco
 -instituicao: Instituicao
--curso: Curso
+-curso:Curso
+-void:cadastrar(Aluno:aluno)
+-Transacao:trocarMoedas(Vantagem:vantagem)
 }
 
 class Professor extends Pessoa{
 -id:Long
 -departamento: Departamento
+-int:encrementarMoedas(int:Valor)
+-Aluno:destribuirMoedas(Aluno:aluno, int:Valor, String:Motivo)
+-void:notificarAluno(Aluno:aluno)
+-Transacao:visualisarTransacoes(Professor:professor)
+-Transacao:gerarTransacao(Aluno:aluno,Professor:professor)
 }
 
 class Endereco{
@@ -45,9 +53,35 @@ class Curso{
 -instituicao: Instituicao
 }
 
+class Trsansacao{
+-id:Long
+-Professor:professor
+-Aluno:aluno
+-String:descricao
+-Vantagem:vantagem
+-DateTime:dt_Transacao
+}
 
+class Vantagem{
+id:Long
+nome:String
+curso:Curso
+Empresa:Empresa
+}
+
+class Empresa{
+id:Long
+nome:String
+void : cadastrarVantagem(Vantagem:vantagem)
+}
+
+
+Aluno -- Trsansacao
 Aluno -- Endereco
+Aluno -- Vantagem
+Empresa -- Vantagem
 Professor -- Departamento
+Professor -- Trsansacao
 Departamento -- Instituicao
 Curso -- Instituicao
 
