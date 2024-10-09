@@ -14,6 +14,7 @@ rectangle "Sistema de Reconhecimento de Mérito Estudantil" as System {
   usecase "Cadastrar Vantagens" as UC5
   usecase "Consultar Transações" as UC7
   usecase "Fazer Login" as UC6
+  usecase "Notificar por email" as UC8
 
 }
 
@@ -33,4 +34,7 @@ A2 --> UC2
 A3 --> UC5
 A3 --> UC7
 A3 --> UC1
+
+UC3 ..> UC8 : include
+UC4 ..> UC8 : include
 @enduml
