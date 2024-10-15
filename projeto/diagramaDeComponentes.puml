@@ -1,0 +1,10 @@
+@startuml
+
+package "Sistema de Moeda" {
+
+    [Frontend] --> [Backend]
+    [Backend] --> [Banco de Dados]
+
+}
+
+@enduml
