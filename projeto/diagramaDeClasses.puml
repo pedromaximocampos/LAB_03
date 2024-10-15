@@ -82,15 +82,14 @@ void : cadastrarVantagem(Vantagem:vantagem)
 }
 
 
-Aluno -- TransacaoProfessor
+Aluno -- Transacao
 Aluno -- Endereco
-Aluno -- Vantagem
-Aluno -- TransacaoTroca
 Empresa -- Vantagem
 Professor -- Departamento
 Professor -- TransacaoProfessor
 Departamento -- Instituicao
 Curso -- Instituicao
+Vantagem -- TransacaoTroca
 
 
 
