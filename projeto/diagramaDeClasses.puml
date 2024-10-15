@@ -13,7 +13,6 @@ class Aluno extends Pessoa{
 -email.: String
 -rg: String
 -endereco: Endereco
--instituicao: Instituicao
 -curso:Curso
 -void:cadastrar(Aluno:aluno)
 -Transacao:trocarMoedas(Vantagem:vantagem)
