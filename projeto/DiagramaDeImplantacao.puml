@@ -1,0 +1,17 @@
+@startuml
+
+node "Servidor de Aplicação" as appServer {
+  [Sistema de Moeda]
+}
+
+database "Banco de Dados" as db {
+}
+
+node "Cliente Web" as client {
+  [Interface Web]
+}
+
+client --> appServer: "Acessa Sistema"
+appServer --> db: "Consulta/Atualiza Dados"
+
+@enduml
