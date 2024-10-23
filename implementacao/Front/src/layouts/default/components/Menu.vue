@@ -36,8 +36,8 @@ const router = useRouter();
 const fechado = ref(false);
 
 const menuGeral = ref([
-  { icon: "mdi-wrench", title: "Clientes", link: "/" },
-  { icon: "mdi-car", title: "Empresas", link: "/empresas" },
+  { icon: "mdi-account", title: "Alunos", link: "/" },
+  { icon: "mdi-office-building", title: "Empresas", link: "/empresas" },
 ]);
 
 function irPara(item) {

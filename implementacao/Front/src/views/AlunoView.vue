@@ -2,7 +2,7 @@
   <v-container fluid class="main pt-10">
     <v-row class="caixa-titulo">
       <v-col cols="8">
-        <h1 class="title pl-3">Empresas</h1>
+        <h1 class="title pl-3">Alunos</h1>
       </v-col>
       <v-col cols="4">
         <ModalCadastro />
@@ -11,27 +11,27 @@
     <v-divider :thickness="4"></v-divider>
     <v-row class="mt-4">
       <v-col>
-        <EmpresaDataTable
+        <AlunosDataTable
           :headers="dataTableHeaders"
-          :empresas="empresaStore.empresas"
-          :is-loading="isLoading"
-        ></EmpresaDataTable>
+          :isLoading="isLoading"
+          :alunos="alunoStore.alunos"
+        />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup>
-import { useEmpresaView } from "./empresaView";
-import ModalCadastro from "@/components/Empresas/ModalCadastroEmpresa.vue";
-import EmpresaDataTable from "@/components/Empresas/EmpresaDataTable.vue";
+import { useAlunoView } from "./alunoView.js";
+import ModalCadastro from "@/components/Aluno/ModalCadastroAluno.vue";
+import AlunosDataTable from "@/components/Aluno/AlunosDataTable.vue";
 import { onBeforeMount } from "vue";
 
-const { dataTableHeaders, isLoading, empresaStore, getAllEmpresas } =
-  useEmpresaView();
+const { dataTableHeaders, isLoading, alunoStore, getAllAlunos } =
+  useAlunoView();
 
 onBeforeMount(() => {
-  getAllEmpresas();
+  getAllAlunos();
 });
 </script>
 

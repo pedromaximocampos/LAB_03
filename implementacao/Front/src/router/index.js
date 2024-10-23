@@ -5,8 +5,8 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "Clientes",
-      component: () => import("../views/ClienteView.vue"),
+      name: "Alunos",
+      component: () => import("../views/AlunoView.vue"),
       meta: {
         layout: "Default",
       },
