@@ -1,4 +1,4 @@
-@startuml
+    @startuml
 skinparam classAttributeIconSize 0
 
 abstract class Pessoa{
@@ -53,18 +53,19 @@ class Curso{
 }
 
 class TransacaoProfessor extends Transacao{
+-id:Long
 -descricao: String
 -professor: Professor
 }
 
 class TransacaoTroca extends Transacao{
+-id:Long
 -vantagem: Vantagem
 }
 
 abstract class Transacao{
--id:Long
 -aluno: Aluno
--moedas: Double
+-moedas: int
 -dt_Transacao: LocalDateTime
 }
 
