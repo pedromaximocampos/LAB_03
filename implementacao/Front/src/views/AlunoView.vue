@@ -70,7 +70,7 @@ const extrato = ref(null);
 const openExtratoModal = async () => {
   try {
     isExtratoModalOpen.value = true;
-    const response = await axios.get('http://localhost:8080/alunos/1/extrato');
+    const response = await axios.get(`http://localhost:8080/alunos/1/extrato`);
     extrato.value = response.data;
   } catch (error) {
     console.error("Erro ao buscar extrato:", error);

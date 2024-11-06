@@ -10,14 +10,7 @@
     hide-default-footer
     :loading="props.isLoading"
   >
-    <template v-slot:[`item.update`]="{ item }">
-      <v-icon
-        icon="mdi-pencil-box-outline"
-        @Click="toggleUpdate('update', item)"
-        :disabled="props.isLoading"
-      >
-      </v-icon>
-    </template>
+  
     <template v-slot:[`item.nome`]="{ item }">
       <span class="uppercase">{{ item.nome }}</span>
     </template>
@@ -38,6 +31,17 @@
     </template>
     <template v-slot:[`item.complemento`]="{ item }">
       <span>{{ item.endereco.complemento }}</span>
+    </template>
+    <template v-slot:[`item.extrato`]="{ item }">
+  <v-btn @Click="handleExtratoModal" color="primary">Extrato</v-btn>
+    </template>
+     <template v-slot:[`item.update`]="{ item }">
+      <v-icon
+        icon="mdi-pencil-box-outline"
+        @Click="toggleUpdate('update', item)"
+        :disabled="props.isLoading"
+      >
+      </v-icon>
     </template>
     <template v-slot:[`item.delete`]="{ item }">
       <v-icon
@@ -88,7 +92,7 @@ const props = defineProps({
   },
 });
 
-const { deleteAluno, updateAluno } = useAlunoView();
+const { deleteAluno, updateAluno, openExtratoModal } = useAlunoView();
 
 const updateDialog = ref(false);
 const deleteDialog = ref(false);
@@ -122,6 +126,7 @@ function handleUpdateAluno(updatedAluno, id) {
   updateAluno(updatedAluno, id);
   updateDialog.value = false;
 }
+
 </script>
 
 <style scoped>

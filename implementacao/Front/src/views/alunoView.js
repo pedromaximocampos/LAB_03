@@ -8,14 +8,15 @@ export function useAlunoView() {
   const isLoading = ref(false);
 
   const dataTableHeaders = [
-    { title: "", key: "update", sortable: false, align: "start" },
-    { title: "Nome", align: "center", key: "nome" },
+    { title: "Nome", align: "start", key: "nome" },
     { title: "Email", align: "center", key: "email" },
     { title: "CPF", align: "center", key: "cpf" },
     { title: "RG", align: "center", key: "rg" },
     { title: "CEP", align: "center", key: "cep" },
     { title: "Numero", align: "center", key: "numero" },
     { title: "Complemento", align: "center", key: "complemento" },
+    { title: "Extrato", key: "extrato", sortable: false, align: "center" },
+    { title: "", key: "update", sortable: false, align: "center" },
     { title: "", key: "delete", sortable: false, align: "end" },
   ];
 
