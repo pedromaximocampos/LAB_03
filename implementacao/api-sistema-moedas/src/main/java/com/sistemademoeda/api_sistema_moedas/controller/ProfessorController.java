@@ -1,7 +1,7 @@
 package com.sistemademoeda.api_sistema_moedas.controller;
 
 import com.sistemademoeda.api_sistema_moedas.model.Professor;
-import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoDto;
+import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoProfessorDto;
 import com.sistemademoeda.api_sistema_moedas.model.dto.TransacaoProfessorDto;
 import com.sistemademoeda.api_sistema_moedas.service.ProfessorService;
 import jakarta.validation.Valid;
@@ -37,7 +37,7 @@ public class ProfessorController {
     }
 
     @GetMapping("/{id}/extrato")
-    public ResponseEntity<ExtratoDto> getExtract(@PathVariable Long id) {
+    public ResponseEntity<ExtratoProfessorDto> getExtract(@PathVariable Long id) {
         return ResponseEntity.ok().body(professorService.getExtract(id));
     }
 }

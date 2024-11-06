@@ -1,9 +1,8 @@
 package com.sistemademoeda.api_sistema_moedas.service;
 
 import com.sistemademoeda.api_sistema_moedas.model.Aluno;
-import com.sistemademoeda.api_sistema_moedas.model.TransacaoProfessor;
 import com.sistemademoeda.api_sistema_moedas.model.dto.AlunoRequestDto;
-import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoDto;
+import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoProfessorDto;
 import com.sistemademoeda.api_sistema_moedas.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +51,8 @@ public class AlunoService {
         return alunoRepository.save(aluno);
     }
 
-    public ExtratoDto getExtract(Long id) {
+    public ExtratoProfessorDto getExtract(Long id) {
         var aluno = findById(id);
-        return new ExtratoDto(aluno.getMoedas(), transacaoService.getAllByAlunoId(id));
+        return new ExtratoProfessorDto(aluno.getMoedas(), transacaoService.getAllByAlunoId(id));
     }
 }

@@ -7,4 +7,5 @@ import jakarta.validation.constraints.Positive;
 public record TransacaoProfessorDto(@NotNull Long idAluno,
                                     @NotNull @Positive int moedas,
                                     @NotBlank String descricao) {
+
 }

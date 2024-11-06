@@ -1,6 +1,7 @@
 package com.sistemademoeda.api_sistema_moedas.service;
 
 import com.sistemademoeda.api_sistema_moedas.model.TransacaoProfessor;
+import com.sistemademoeda.api_sistema_moedas.model.dto.TransacaoProfessorResponseDto;
 import com.sistemademoeda.api_sistema_moedas.repository.TransacaoProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,17 @@ public class TransacaoProfessorService {
         transacaoProfessorRepository.save(transacao);
     }
 
-    public List<TransacaoProfessor> getAllByAlunoId(Long id) {
-        return transacaoProfessorRepository.findAllByAlunoId(id);
+    public List<TransacaoProfessorResponseDto> getAllByAlunoId(Long id) {
+        return transacaoProfessorRepository.findAllByAlunoId(id)
+                .stream()
+                .map(TransacaoProfessorResponseDto::fromTransacao)
+                .toList();
     }
 
-    public List<TransacaoProfessor> getAllByProfessorId(Long id) {
-        return transacaoProfessorRepository.findAllByProfessorId(id);
+    public List<TransacaoProfessorResponseDto> getAllByProfessorId(Long id) {
+        return transacaoProfessorRepository.findAllByProfessorId(id)
+                .stream()
+                .map(TransacaoProfessorResponseDto::fromTransacao)
+                .toList();
     }
 }
