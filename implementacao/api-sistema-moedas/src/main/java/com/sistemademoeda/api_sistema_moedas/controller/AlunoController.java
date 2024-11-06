@@ -2,6 +2,7 @@ package com.sistemademoeda.api_sistema_moedas.controller;
 
 import com.sistemademoeda.api_sistema_moedas.model.Aluno;
 import com.sistemademoeda.api_sistema_moedas.model.dto.AlunoRequestDto;
+import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoDto;
 import com.sistemademoeda.api_sistema_moedas.service.AlunoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class AlunoController {
     @PutMapping("/{id}")
     public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody AlunoRequestDto alunoRequestDto) {
         return ResponseEntity.ok(alunoService.update(id, alunoRequestDto));
+    }
+
+    @GetMapping("/{id}/extrato")
+    public ResponseEntity<ExtratoDto> getExtract(@PathVariable Long id) {
+        return ResponseEntity.ok(alunoService.getExtract(id));
     }
 }

@@ -1,7 +1,9 @@
 package com.sistemademoeda.api_sistema_moedas.service;
 
 import com.sistemademoeda.api_sistema_moedas.model.Aluno;
+import com.sistemademoeda.api_sistema_moedas.model.TransacaoProfessor;
 import com.sistemademoeda.api_sistema_moedas.model.dto.AlunoRequestDto;
+import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoDto;
 import com.sistemademoeda.api_sistema_moedas.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class AlunoService {
 
     @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
+    private TransacaoProfessorService transacaoService;
 
     public Aluno register(AlunoRequestDto alunoRequestDto) {
         var curso = cursoService.findById(alunoRequestDto.idCurso());
@@ -45,5 +50,10 @@ public class AlunoService {
         var aluno = findById(id);
         aluno.updateData(alunoRequestDto);
         return alunoRepository.save(aluno);
+    }
+
+    public ExtratoDto getExtract(Long id) {
+        var aluno = findById(id);
+        return new ExtratoDto(aluno.getMoedas(), transacaoService.getAllByAlunoId(id));
     }
 }

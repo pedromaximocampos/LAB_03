@@ -2,6 +2,7 @@ package com.sistemademoeda.api_sistema_moedas.service;
 
 import com.sistemademoeda.api_sistema_moedas.model.Professor;
 import com.sistemademoeda.api_sistema_moedas.model.TransacaoProfessor;
+import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoDto;
 import com.sistemademoeda.api_sistema_moedas.model.dto.TransacaoProfessorDto;
 import com.sistemademoeda.api_sistema_moedas.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,11 @@ public class ProfessorService {
         TransacaoProfessor transacao = TransacaoProfessor.fromRequest(transacaoProfessorDto, professor, aluno);
 
         transacaoService.save(transacao);
+    }
+
+    public ExtratoDto getExtract(Long id) {
+        var professor = professorRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Professor não encontrado. Id " + id));
+        return new ExtratoDto(professor.getMoedas(), transacaoService.getAllByProfessorId(id));
     }
 }
