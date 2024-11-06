@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/prefessores")
+@RequestMapping("/professores")
 public class ProfessorController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class ProfessorController {
     }
 
     @PostMapping("/{idProfessor}/enviar-moedas")
-    public ResponseEntity<Void> sendCoins(@RequestParam Long idProfessor,
+    public ResponseEntity<Void> sendCoins(@PathVariable Long idProfessor,
                                           @RequestBody @Valid TransacaoProfessorDto transacaoProfessorDto) {
         professorService.sendCoins(idProfessor, transacaoProfessorDto);
         return ResponseEntity.ok().build();

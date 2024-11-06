@@ -38,6 +38,7 @@ const fechado = ref(false);
 const menuGeral = ref([
   { icon: "mdi-account", title: "Alunos", link: "/" },
   { icon: "mdi-office-building", title: "Empresas", link: "/empresas" },
+  { icon: "mdi-account", title: "Professores", link: "/professores" },
 ]);
 
 function irPara(item) {
