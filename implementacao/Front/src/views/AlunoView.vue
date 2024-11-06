@@ -33,7 +33,8 @@
               <v-list-item v-for="transacao in extrato.transacao" :key="transacao.id">
                 <v-list-item-content>
                   <p><strong>ID Transação:</strong> {{ transacao.id }}</p>
-                  <p><strong>ID Aluno:</strong> {{ transacao.idAluno }}</p>
+                  <p><strong>Aluno:</strong> {{ transacao.aluno }}</p>
+                  <p><strong>Profesor:</strong> {{ transacao.aluno }}</p>
                   <p><strong>Moedas:</strong> {{ transacao.moedas }}</p>
                   <p><strong>Descrição:</strong> {{ transacao.descricao }}</p>
                   <p><strong>Data:</strong> {{ new Date(transacao.data).toLocaleString() }}</p>

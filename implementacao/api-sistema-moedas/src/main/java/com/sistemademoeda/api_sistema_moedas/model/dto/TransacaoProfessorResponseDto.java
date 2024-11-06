@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 
 public record TransacaoProfessorResponseDto(Long id,
 
-                                            Long idProfessor,
+                                            String professor,
 
-                                            Long idAluno,
+                                            String aluno,
 
                                             int moedas,
 
@@ -20,8 +20,8 @@ public record TransacaoProfessorResponseDto(Long id,
     public static TransacaoProfessorResponseDto fromTransacao(TransacaoProfessor transacao) {
         return new TransacaoProfessorResponseDto(
                 transacao.getId(),
-                transacao.getProfessor().getId(),
-                transacao.getAluno().getId(),
+                transacao.getProfessor().getNome(),
+                transacao.getAluno().getNome(),
                 transacao.getMoedas(),
                 transacao.getDescricao(),
                 transacao.getData());

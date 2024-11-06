@@ -25,7 +25,8 @@
         <ul>
           <li v-for="transacao in extrato.transacao" :key="transacao.id">
             <p><strong>ID Transação:</strong> {{ transacao.id }}</p>
-            <p><strong>ID Aluno:</strong> {{ transacao.idAluno }}</p>
+            <p><strong>Professor:</strong> {{ transacao.professor }}</p>
+            <p><strong>Aluno:</strong> {{ transacao.aluno }}</p>
             <p><strong>Moedas:</strong> {{ transacao.moedas }}</p>
             <p><strong>Descrição:</strong> {{ transacao.descricao }}</p>
             <p><strong>Data:</strong> {{ new Date(transacao.data).toLocaleString() }}</p>
