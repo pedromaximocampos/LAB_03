@@ -72,7 +72,9 @@ abstract class Transacao{
 class Vantagem{
 id:Long
 nome:String
-custo: Double
+descricao:String
+moedas: int
+foto:String
 Empresa:Empresa
 }
 
