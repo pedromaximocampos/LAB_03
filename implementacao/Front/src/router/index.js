@@ -18,7 +18,8 @@ const router = createRouter({
       meta: {
         layout: "Default",
       },
-    },,
+    },
+    ,
     {
       path: "/professores",
       name: "Professores",
@@ -27,7 +28,14 @@ const router = createRouter({
         layout: "Default",
       },
     },
-    
+    {
+      path: "/vantagens",
+      name: "Vantagens",
+      component: () => import("../views/VantagemView.vue"),
+      meta: {
+        layout: "Default",
+      },
+    },
   ],
 });
 

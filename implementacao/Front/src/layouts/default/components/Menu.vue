@@ -39,6 +39,7 @@ const menuGeral = ref([
   { icon: "mdi-account", title: "Alunos", link: "/" },
   { icon: "mdi-office-building", title: "Empresas", link: "/empresas" },
   { icon: "mdi-account", title: "Professores", link: "/professores" },
+  { icon: "mdi-accont", title: "Vantagens", link: "/vantagens" },
 ]);
 
 function irPara(item) {
