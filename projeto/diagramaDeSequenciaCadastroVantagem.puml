@@ -1,0 +1,17 @@
+@startuml
+actor Empresa
+participant Sistema
+participant BancoDeDados
+
+Empresa -> Sistema: Login e senha
+Sistema -> BancoDeDados: Validar credenciais
+BancoDeDados --> Sistema: Credenciais válidas
+Sistema --> Empresa: Login bem-sucedido
+
+Empresa -> Sistema: Solicitar cadastro de vantagem
+Empresa -> Sistema: Enviar dados da vantagem (nome, descrição, foto, custo)
+Sistema -> Sistema: Validar dados da vantagem
+Sistema -> BancoDeDados: Salvar vantagem
+BancoDeDados --> Sistema: Confirmação de salvamento
+Sistema --> Empresa: Cadastro de vantagem bem-sucedido
+@enduml

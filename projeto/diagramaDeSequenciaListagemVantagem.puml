@@ -1,0 +1,15 @@
+@startuml
+actor Aluno
+participant Sistema
+participant BancoDeDados
+
+Aluno -> Sistema: Login e senha
+Sistema -> BancoDeDados: Validar credenciais
+BancoDeDados --> Sistema: Credenciais válidas
+Sistema --> Aluno: Login bem-sucedido
+
+Aluno -> Sistema: Solicitar listagem de vantagens
+Sistema -> BancoDeDados: Consultar vantagens disponíveis
+BancoDeDados --> Sistema: Retornar lista de vantagens
+Sistema --> Aluno: Exibir lista de vantagens
+@enduml
