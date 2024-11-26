@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class VantagemService {
@@ -25,5 +26,9 @@ public class VantagemService {
 
     public List<Vantagem> getAll() {
         return vantagemRepository.findAll();
+    }
+    public Vantagem getbyId(Long idVantagem) {
+        return vantagemRepository.findById(idVantagem)
+                .orElseThrow(() -> new NoSuchElementException("vantagem não encontrada. Id " + idVantagem));
     }
 }
