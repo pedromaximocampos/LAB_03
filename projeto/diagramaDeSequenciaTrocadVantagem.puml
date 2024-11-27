@@ -1,0 +1,45 @@
+@startuml
+actor Aluno
+participant "Front-End Web" as FrontEnd
+participant "Controller" as Controller
+participant "Service" as Service
+participant "Repository" as Repository
+database "Banco de Dados" as DB
+
+Aluno -> FrontEnd: Realizar Login
+FrontEnd -> Controller: Enviar credenciais
+Controller -> Service: Verificar credenciais
+Service -> Repository: Consultar credenciais no banco
+Repository -> DB: Resgatar credenciais no banco
+DB --> Repository: Retorna dados de autenticacao do usuario
+Repository --> Service: Retorna dados de autenticacao do usuario
+Service --> Controller: Autenticação bem-sucedida
+Controller --> FrontEnd: Login autorizado
+
+Aluno -> FrontEnd: Selecionar vantagem
+FrontEnd -> Controller: Enviar solicitação de troca
+Controller -> Service: Validar solicitação e verificar saldo
+Service -> Repository: Consultar saldo do aluno
+Repository -> DB: Buscar dados do aluno
+DB --> Repository: Retorna dados do aluno com o saldo de moedas
+Repository --> Service:Retorna dados do aluno com o saldo de moedas
+alt Saldo suficiente
+    Service -> Repository: Deduzir saldo do aluno
+    Repository -> DB: Atualizar saldo do aluno
+    DB --> Repository: Confirmação de dedução
+
+    Service -> Repository: Salvar transação
+    Repository -> DB: Registrar transacao de troca de vantagem
+    DB --> Repository: Confirmação da transação
+
+    Service -> Service: Gerar código único de resgate
+    Repository -> DB: Registrar codigo de resgate
+    DB --> Repository: Confirmação do registro
+
+    Service -> Aluno: Enviar email com cupom (código de resgate)
+else Saldo insuficiente
+    Service --> Controller: Notificar saldo insuficiente
+    Controller --> FrontEnd: Exibir erro de saldo insuficiente
+end
+
+@enduml
