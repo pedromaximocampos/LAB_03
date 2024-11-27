@@ -1,15 +1,28 @@
 @startuml
 actor Aluno
-participant Sistema
-participant BancoDeDados
+participant "Front-End Web" as FrontEnd
+participant "Controller" as Controller
+participant "Service" as Service
+participant "Repository" as Repository
+database "Banco de Dados" as DB
 
-Aluno -> Sistema: Login e senha
-Sistema -> BancoDeDados: Validar credenciais
-BancoDeDados --> Sistema: Credenciais válidas
-Sistema --> Aluno: Login bem-sucedido
+Aluno -> FrontEnd: Realizar Login
+FrontEnd -> Controller: Enviar credenciais
+Controller -> Service: Validar credenciais
+Service -> Repository: Consultar credenciais no banco
+Repository -> DB: Validar credenciais
+DB --> Repository: Credenciais válidas
+Repository --> Service: Credenciais válidas
+Service --> Controller: Login autorizado
+Controller --> FrontEnd: Login bem-sucedido
 
-Aluno -> Sistema: Solicitar listagem de vantagens
-Sistema -> BancoDeDados: Consultar vantagens disponíveis
-BancoDeDados --> Sistema: Retornar lista de vantagens
-Sistema --> Aluno: Exibir lista de vantagens
+Aluno -> FrontEnd: Solicitar listagem de vantagens
+FrontEnd -> Controller: Solicitar vantagens disponíveis
+Controller -> Service: Consultar vantagens
+Service -> Repository: Obter lista de vantagens do banco
+Repository -> DB: Consultar vantagens disponíveis
+DB --> Repository: Retornar lista de vantagens
+Repository --> Service: Retornar lista de vantagens
+Service --> Controller: Lista de vantagens
+Controller --> FrontEnd: Exibir lista de vantagens
 @enduml

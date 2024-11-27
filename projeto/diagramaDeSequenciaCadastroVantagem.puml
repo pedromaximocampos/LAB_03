@@ -1,17 +1,28 @@
 @startuml
 actor Empresa
-participant Sistema
-participant BancoDeDados
+participant "Front-End Web" as FrontEnd
+participant "Controller" as Controller
+participant "Service" as Service
+participant "Repository" as Repository
+database "Banco de Dados" as DB
 
-Empresa -> Sistema: Login e senha
-Sistema -> BancoDeDados: Validar credenciais
-BancoDeDados --> Sistema: Credenciais válidas
-Sistema --> Empresa: Login bem-sucedido
+Empresa -> FrontEnd: Realizar Login
+FrontEnd -> Controller: Enviar credenciais
+Controller -> Service: Validar credenciais
+Service -> Repository: Consultar credenciais no banco
+Repository -> DB: Validar credenciais
+DB --> Repository: Credenciais válidas
+Repository --> Service: Credenciais válidas
+Service --> Controller: Login autorizado
+Controller --> FrontEnd: Login bem-sucedido
 
-Empresa -> Sistema: Solicitar cadastro de vantagem
-Empresa -> Sistema: Enviar dados da vantagem (nome, descrição, foto, custo)
-Sistema -> Sistema: Validar dados da vantagem
-Sistema -> BancoDeDados: Salvar vantagem
-BancoDeDados --> Sistema: Confirmação de salvamento
-Sistema --> Empresa: Cadastro de vantagem bem-sucedido
+Empresa -> FrontEnd: Solicitar cadastro de vantagem
+FrontEnd -> Controller: Enviar dados da vantagem (nome, descrição, foto, custo)
+Controller -> Service: Validar dados da vantagem
+Service -> Repository: Salvar vantagem
+Repository -> DB: Inserir dados da vantagem
+DB --> Repository: Confirmação de salvamento
+Repository --> Service: Confirmação de salvamento
+Service --> Controller: Cadastro de vantagem bem-sucedido
+Controller --> FrontEnd: Confirmação de cadastro
 @enduml
