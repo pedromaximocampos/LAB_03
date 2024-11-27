@@ -45,6 +45,7 @@ export function useVantagemView() {
       emailAluno: email,
       idVantagem: vantagemId,
     };
+    console.log(body);
 
     axios
       .post(`${defaultStore.apiUrl}/alunos/trocar-moedas`, body, {

@@ -94,7 +94,10 @@ function toggleResgate() {
 const email = ref("");
 
 function resgatar() {
-  resgatarVantagem(email, props.vantagem.id);
+  console.log(email.value);
+  console.log(props.vantagem.id);
+
+  resgatarVantagem(email.value, props.vantagem.id);
   dialog.value = false;
 }
 
