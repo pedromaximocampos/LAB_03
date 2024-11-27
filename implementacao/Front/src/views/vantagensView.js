@@ -40,10 +40,36 @@ export function useVantagemView() {
       });
   }
 
+  async function resgatarVantagem(email, vantagemId) {
+    const body = {
+      emailAluno: email,
+      idVantagem: vantagemId,
+    };
+
+    axios
+      .post(`${defaultStore.apiUrl}/alunos/trocar-moedas`, body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        alert("Vantagem resgatada com sucesso!");
+        getAllVantagens();
+      })
+      .catch((error) => {
+        alert("Erro ao resgatar vantagem");
+        console.log(error);
+      })
+      .finally(() => {
+        isLoading.value = false;
+      });
+  }
+
   return {
     vantagemStore,
     isLoading,
     getAllVantagens,
     createNewVantagem,
+    resgatarVantagem,
   };
 }
