@@ -1,14 +1,18 @@
 package com.sistemademoeda.api_sistema_moedas.service;
 
 import com.sistemademoeda.api_sistema_moedas.model.Aluno;
+import com.sistemademoeda.api_sistema_moedas.model.TransacaoAluno;
+import com.sistemademoeda.api_sistema_moedas.model.Vantagem;
 import com.sistemademoeda.api_sistema_moedas.model.dto.AlunoRequestDto;
 import com.sistemademoeda.api_sistema_moedas.model.dto.ExtratoProfessorDto;
 import com.sistemademoeda.api_sistema_moedas.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class AlunoService {
@@ -24,6 +28,8 @@ public class AlunoService {
 
     @Autowired
     private TransacaoProfessorService transacaoService;
+    @Autowired
+    private TransacaoAlunoService transacaoAlunoService;
 
     public Aluno register(AlunoRequestDto alunoRequestDto) {
         var curso = cursoService.findById(alunoRequestDto.idCurso());
@@ -41,6 +47,10 @@ public class AlunoService {
                 .orElseThrow(() -> new NoSuchElementException("Aluno não encontrado. Id " + id));
     }
 
+    public Aluno findByEmail(String emailALuno) {
+        return alunoRepository.findByEmail(emailALuno);
+    }
+
     public void delete(Long id) {
         alunoRepository.deleteById(id);
     }
@@ -51,8 +61,31 @@ public class AlunoService {
         return alunoRepository.save(aluno);
     }
 
+    public Aluno updateMoedas(Aluno aluno) {
+        return alunoRepository.save(aluno);
+    }
+
     public ExtratoProfessorDto getExtract(Long id) {
         var aluno = findById(id);
         return new ExtratoProfessorDto(aluno.getMoedas(), transacaoService.getAllByAlunoId(id));
+    }
+
+    public TransacaoAluno TrocarMoedas(String emailAluno, Vantagem vantagem){
+        Aluno aluno = new Aluno();
+        aluno = findByEmail(emailAluno);
+
+        if(aluno.getMoedas() >= vantagem.getMoedas()){
+            TransacaoAluno transacaoAluno = new TransacaoAluno();
+            transacaoAluno.setIdAluno(aluno.getId());
+            transacaoAluno.setMoedas(vantagem.getMoedas());
+            transacaoAluno.setDt_transacao(LocalDate.now());
+
+            transacaoAlunoService.save(transacaoAluno);
+            aluno.setMoedas(aluno.getMoedas() - vantagem.getMoedas());
+            updateMoedas(aluno);
+            return transacaoAluno;
+        }else{
+            return null;
+        }
     }
 }
