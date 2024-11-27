@@ -20,6 +20,8 @@ export function useAlunoView() {
     { title: "", key: "delete", sortable: false, align: "end" },
   ];
 
+  
+
   async function createNewAluno(aluno) {
     isLoading.value = true;
     console.log(aluno);

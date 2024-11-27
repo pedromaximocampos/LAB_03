@@ -33,7 +33,57 @@
       <span>{{ item.endereco.complemento }}</span>
     </template>
     <template v-slot:[`item.extrato`]="{ item }">
-  <v-btn @Click="handleExtratoModal" color="primary">Extrato</v-btn>
+  <v-btn @Click="handleExtratoModal(item.id)" color="primary">Extrato</v-btn>
+  <v-dialog v-model="extratoDialog" max-height="1000" max-width="1000">
+    <v-card
+        prepend-icon="mdi-plus"
+        title="Extrato Aluno"
+        class="modal-dialog"
+      >
+        <v-divider></v-divider>
+        <v-form v-model="valid">
+          <v-container>
+            <v-row>
+              <v-col>
+                <div v-if="extrato">
+            <p><strong>Moedas disponíveis:</strong> {{ extrato.moedas }}</p>
+            <v-list dense>
+              <v-list-item v-for="transacao in extrato.transacao" :key="transacao.id">
+                <v-list-item-content>
+                  <p><strong>ID Transação:</strong> {{ transacao.id }}</p>
+                  <p><strong>Aluno:</strong> {{ transacao.aluno }}</p>
+                  <p><strong>Profesor:</strong> {{ transacao.aluno }}</p>
+                  <p><strong>Moedas:</strong> {{ transacao.moedas }}</p>
+                  <p><strong>Descrição:</strong> {{ transacao.descricao }}</p>
+                  <p><strong>Data:</strong> {{ new Date(transacao.data).toLocaleString() }}</p>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </div>
+          <div v-else>
+            <p>Carregando extrato...</p>
+          </div>
+              </v-col>
+             
+            </v-row>
+
+          </v-container>
+        </v-form>
+        <template v-slot:actions>
+          <div class="d-flex justify-end">
+            <v-btn
+              elevated
+              class="ma-2 text-capitalize cancelBtn"
+              prepend-icon="mdi-cancel"
+              @click="handleExtratoModal"
+            >
+              Cancelar
+            </v-btn>
+          </div>
+        </template>
+      </v-card>
+    
+  </v-dialog>
     </template>
      <template v-slot:[`item.update`]="{ item }">
       <v-icon
@@ -73,8 +123,14 @@
 <script setup>
 import ModalUpdateAluno from "./ModalUpdateAluno.vue";
 import ModalDeleteAluno from "./ModalDeleteAluno.vue";
+import axios from "axios";
 import { ref } from "vue";
 import { useAlunoView } from "@/views/alunoView";
+
+
+const extratoDialog = ref(false)
+const extrato = ref(null);
+
 
 const selectedAluno = ref(null);
 const props = defineProps({
@@ -104,6 +160,24 @@ function toggleUpdate(action, item) {
   } else {
     updateDialog.value = false;
   }
+}
+async function getExtratoAluno(idAluno){
+  
+    axios.get(`http://localhost:8080/alunos/${idAluno}/extrato`)
+    .then((response) => {
+      extrato.value = response.data
+    })
+    .catch((error)=>{
+      console.log(error)
+    }).finally(()=>{
+
+    })
+    
+}
+
+function handleExtratoModal(idAluno){
+  extratoDialog.value = !extratoDialog.value
+  getExtratoAluno(idAluno)
 }
 
 function toggleDelete(action, item) {
