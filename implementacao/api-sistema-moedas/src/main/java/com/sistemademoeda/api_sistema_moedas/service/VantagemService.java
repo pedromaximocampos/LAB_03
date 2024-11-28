@@ -19,9 +19,14 @@ public class VantagemService {
     private EmpresaService empresaService;
 
     public Vantagem create(VantagemRequestDto vantagemRequestDto) {
-        var empresa = empresaService.findById(vantagemRequestDto.idEmpresa());
-        var vantagemEntity = Vantagem.fromRequest(vantagemRequestDto, empresa);
-        return vantagemRepository.save(vantagemEntity);
+        var empresa = empresaService.findByCnpj(vantagemRequestDto.cnpj());
+        if(empresa != null){
+            var vantagemEntity = Vantagem.fromRequest(vantagemRequestDto, empresa);
+            return vantagemRepository.save(vantagemEntity);
+        }else{
+            return null;
+        }
+
     }
 
     public List<Vantagem> getAll() {

@@ -23,6 +23,7 @@ public class Empresa {
 
 
     private String nome;
+    private String cnpj;
 
     public static Empresa fromRequest(EmpresaRequestDto empresaRequestDto) {
         Empresa empresa = new Empresa();

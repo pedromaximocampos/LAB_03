@@ -41,4 +41,13 @@ public class EmpresaService {
         empresa.updateData(empresaRequestDto);
         return empresaRepository.save(empresa);
     }
+
+    public Empresa findByCnpj (String cnpj){
+        Empresa empresa = empresaRepository.findByCnpj(cnpj);
+        if(empresa != null){
+            return empresa;
+        }else{
+            return null;
+        }
+    }
 }

@@ -11,5 +11,5 @@ public record VantagemRequestDto(@NotBlank String nome,
 
                                  @NotBlank String foto,
 
-                                 @NotNull Long idEmpresa) {
+                                 @NotNull String cnpj) {
 }
